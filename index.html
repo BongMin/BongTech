@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECH-MEASUREMENT | 산업용 장비·계측기·센서 및 데이터 분석 솔루션</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Noto Sans KR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Engineering Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            900: '#0A192F',
+                            800: '#112240',
+                            700: '#1D3557',
+                        },
+                        techblue: {
+                            600: '#0284C7',
+                            500: '#0EA5E9',
+                            100: '#E0F2FE',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-sky-600 selection:text-white">
+
+    <!-- ==================== 1. 상단 네비게이션 바 (Header) ==================== -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- 로고 영역 -->
+                <a href="#" class="flex items-center space-x-3 group">
+                    <div class="w-10 h-10 bg-navy-900 rounded-lg flex items-center justify-center text-sky-400 group-hover:bg-sky-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-wave-square text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="block text-xl font-bold tracking-tight text-navy-900">TECH-MEASUREMENT</span>
+                        <span class="block text-[11px] font-medium text-slate-500 tracking-wider">산업 계측 및 데이터 솔루션</span>
+                    </div>
+                </a>
+
+                <!-- 데스크톱 메인 메뉴 -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#products" class="text-sm font-semibold text-slate-700 hover:text-sky-600 transition-colors">제품 소개</a>
+                    <a href="#software" class="text-sm font-semibold text-slate-700 hover:text-sky-600 transition-colors">소프트웨어 & 자료실</a>
+                    <a href="#solutions" class="text-sm font-semibold text-slate-700 hover:text-sky-600 transition-colors">솔루션/적용분야</a>
+                    <a href="#contact" class="text-sm font-semibold text-slate-700 hover:text-sky-600 transition-colors">고객지원</a>
+                </nav>
+
+                <!-- 우측 유틸리티 (검색 & 견적문의) -->
+                <div class="hidden md:flex items-center space-x-3">
+                    <button onclick="toggleSearchModal()" class="p-2.5 text-slate-500 hover:text-navy-900 hover:bg-slate-100 rounded-lg transition-colors" title="제품/모델명 검색">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <a href="#contact" onclick="selectInquiryProduct('일반 제품 및 솔루션 견적 문의')" class="px-5 py-2.5 bg-sky-600 hover:bg-sky-700 text-white text-sm font-semibold rounded-lg shadow-sm transition-all flex items-center space-x-2">
+                        <i class="fa-regular fa-file-lines"></i>
+                        <span>빠른 견적 문의</span>
+                    </a>
+                </div>
+
+                <!-- 모바일 햄버거 메뉴 버튼 -->
+                <div class="flex items-center md:hidden space-x-2">
+                    <button onclick="toggleSearchModal()" class="p-2.5 text-slate-600 hover:bg-slate-100 rounded-lg">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="p-2.5 text-slate-700 hover:bg-slate-100 rounded-lg">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 모바일 드롭다운 메뉴 -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200 px-4 pt-3 pb-5 space-y-2 shadow-lg">
+            <a href="#products" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-sky-600">제품 소개 (장비/계측기/센서)</a>
+            <a href="#software" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-sky-600">소프트웨어 & 자료실</a>
+            <a href="#solutions" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-sky-600">솔루션/적용분야</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-sky-600">고객지원 (견적/기술문의)</a>
+            <div class="pt-2">
+                <a href="#contact" onclick="toggleMobileMenu()" class="block w-full text-center px-4 py-3 bg-sky-600 text-white font-semibold rounded-lg">빠른 견적 문의하기</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== 2. 히어로 섹션 (Hero Banner) ==================== -->
+    <section class="relative bg-navy-900 text-white overflow-hidden">
+        <!-- 배경 엔지니어링 그리드 패턴 장식 -->
+        <div class="absolute inset-0 opacity-15" style="background-image: radial-gradient(#38BDF8 1px, transparent 1px); background-size: 28px 28px;"></div>
+        <div class="absolute -right-24 -top-24 w-96 h-96 bg-sky-500/20 rounded-full blur-3xl"></div>
+        <div class="absolute -left-24 -bottom-24 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- 좌측 카피 영역 -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-navy-800 border border-sky-500/30 text-sky-400 text-xs font-semibold tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+                        <span>INDUSTRIAL PRECISION & DATA ACQUISITION</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight">
+                        정밀 계측부터 데이터 분석 솔루션까지, <br class="hidden sm:inline">
+                        <span class="text-sky-400">산업 현장의 최적화된 파트너</span>
+                    </h1>
+                    <p class="text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed">
+                        고정밀 산업용 센서, 다채널 DAQ 계측 시스템, 신뢰성 시험 장비 공급은 물론 현장 엔지니어를 위한 전용 제어 소프트웨어 및 기술 자료를 원스톱으로 제공합니다.
+                    </p>
+                    <div class="pt-4 flex flex-wrap gap-4">
+                        <a href="#products" class="px-6 py-3.5 bg-sky-600 hover:bg-sky-500 text-white font-semibold rounded-lg shadow-lg shadow-sky-600/25 transition-all flex items-center space-x-2">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <span>제품 카탈로그 보기</span>
+                        </a>
+                        <a href="#software" class="px-6 py-3.5 bg-navy-800 hover:bg-navy-700 text-white border border-slate-600 hover:border-sky-400 font-semibold rounded-lg transition-all flex items-center space-x-2">
+                            <i class="fa-solid fa-download text-sky-400"></i>
+                            <span>소프트웨어 다운로드</span>
+                        </a>
+                    </div>
+
+                    <!-- 핵심 지표 요약 -->
+                    <div class="pt-6 grid grid-cols-3 gap-4 border-t border-slate-700/70 max-w-lg">
+                        <div>
+                            <div class="text-2xl font-bold text-white">0.01%</div>
+                            <div class="text-xs text-slate-400 mt-0.5">초정밀 계측 분해능</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-white">250+</div>
+                            <div class="text-xs text-slate-400 mt-0.5">산업용 장비/센서 라인업</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-white">24/7</div>
+                            <div class="text-xs text-slate-400 mt-0.5">엔지니어링 기술 지원</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 우측 대시보드/계측기 시뮬레이션 비주얼 카드 -->
+                <div class="lg:col-span-5">
+                    <div class="bg-navy-800/90 border border-slate-700 rounded-2xl p-6 shadow-2xl backdrop-blur-sm">
+                        <div class="flex items-center justify-between border-b border-slate-700 pb-4 mb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                                <span class="ml-2 text-xs font-mono text-slate-400">TM-DAQ Studio v4.2 - Live Monitor</span>
+                            </div>
+                            <span class="px-2 py-0.5 text-[11px] font-mono bg-emerald-500/20 text-emerald-300 rounded">ONLINE</span>
+                        </div>
+                        <!-- 파형 SVG 그래픽 -->
+                        <div class="bg-navy-900 rounded-xl p-4 border border-slate-800 mb-4">
+                            <div class="flex justify-between text-xs text-slate-400 mb-2 font-mono">
+                                <span>CH1: Load Cell (kN)</span>
+                                <span class="text-sky-400 font-semibold">48.92 kN [100kHz]</span>
+                            </div>
+                            <svg viewBox="0 0 300 80" class="w-full h-20 stroke-sky-400 fill-none" stroke-width="2">
+                                <path d="M0,40 Q15,10 30,40 T60,40 T90,40 Q105,5 120,40 T150,40 T180,40 Q195,15 210,40 T240,40 T270,40 T300,40" />
+                                <line x1="0" y1="40" x2="300" y2="40" stroke="#334155" stroke-width="1" stroke-dasharray="4" />
+                            </svg>
+                        </div>
+                        <!-- 상태 요약 리스트 -->
+                        <div class="grid grid-cols-2 gap-3 text-xs">
+                            <div class="bg-navy-900/70 p-3 rounded-lg border border-slate-800">
+                                <span class="text-slate-400 block">환경 챔버 온도</span>
+                                <span class="text-base font-bold text-white font-mono mt-1 block">-40.0 °C ~ +150.0 °C</span>
+                            </div>
+                            <div class="bg-navy-900/70 p-3 rounded-lg border border-slate-800">
+                                <span class="text-slate-400 block">통신 프로토콜</span>
+                                <span class="text-base font-bold text-sky-400 font-mono mt-1 block">EtherCAT / Modbus</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 3. 주요 제품 카테고리 (Products Section) ==================== -->
+    <section id="products" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-sky-600 font-bold text-sm tracking-wider uppercase">PRODUCT LINEUP</span>
+            <h2 class="text-3xl font-bold text-navy-900 mt-2">주요 제품 카테고리</h2>
+            <p class="text-slate-600 mt-3">연구개발(R&D)부터 생산 라인 자동화 검사까지 다양한 산업 환경에 대응하는 하드웨어 솔루션을 확인하세요.</p>
+        </div>
+
+        <!-- 카테고리 탭 버튼 -->
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10" id="product-tabs">
+            <button onclick="filterProducts('equipment')" data-tab="equipment" class="tab-btn active px-6 py-3 rounded-xl text-sm font-bold transition-all bg-navy-900 text-white shadow-md">
+                <i class="fa-solid fa-industry mr-2"></i>산업용 장비 (시험기/챔버/전원)
+            </button>
+            <button onclick="filterProducts('instrument')" data-tab="instrument" class="tab-btn px-6 py-3 rounded-xl text-sm font-bold transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200">
+                <i class="fa-solid fa-microchip mr-2"></i>정밀 계측기 (DAQ/로거/스코프)
+            </button>
+            <button onclick="filterProducts('sensor')" data-tab="sensor" class="tab-btn px-6 py-3 rounded-xl text-sm font-bold transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200">
+                <i class="fa-solid fa-satellite-dish mr-2"></i>산업용 센서 (로드셀/압력/변위)
+            </button>
+        </div>
+
+        <!-- 제품 카드 그리드 (JS 동적 렌더링) -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- 자바스크립트에서 선택된 카테고리에 따라 카드가 렌더링됩니다 -->
+        </div>
+    </section>
+
+    <!-- ==================== 4. 소프트웨어 & 자료실 (Software & Download Center) ==================== -->
+    <section id="software" class="py-20 bg-slate-100 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-sky-600 font-bold text-sm tracking-wider uppercase">ENGINEERING RESOURCES</span>
+                    <h2 class="text-3xl font-bold text-navy-900 mt-2">소프트웨어 & 기술 자료실</h2>
+                    <p class="text-slate-600 mt-2">장비 제어·데이터 분석 소프트웨어, 최신 드라이버, 매뉴얼 및 2D/3D CAD 도면을 다운로드하세요.</p>
+                </div>
+
+                <!-- 자료실 키워드 검색 -->
+                <div class="relative w-full md:w-72">
+                    <input type="text" id="resource-search" onkeyup="filterResources()" placeholder="모델명 또는 파일명 검색..." 
+                        class="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-400 text-sm"></i>
+                </div>
+            </div>
+
+            <!-- 카테고리 필터 필(Pill) -->
+            <div class="flex flex-wrap gap-2 mb-6" id="resource-filters">
+                <button onclick="setResourceCategory('ALL')" data-cat="ALL" class="res-filter-btn active px-4 py-2 rounded-lg text-xs font-bold bg-sky-600 text-white transition-colors">
+                    전체 자료 (8)
+                </button>
+                <button onclick="setResourceCategory('SOFTWARE')" data-cat="SOFTWARE" class="res-filter-btn px-4 py-2 rounded-lg text-xs font-bold bg-white text-slate-600 hover:bg-slate-200 border border-slate-200 transition-colors">
+                    제어/분석 프로그램
+                </button>
+                <button onclick="setResourceCategory('DRIVER')" data-cat="DRIVER" class="res-filter-btn px-4 py-2 rounded-lg text-xs font-bold bg-white text-slate-600 hover:bg-slate-200 border border-slate-200 transition-colors">
+                    드라이버/펌웨어
+                </button>
+                <button onclick="setResourceCategory('MANUAL')" data-cat="MANUAL" class="res-filter-btn px-4 py-2 rounded-lg text-xs font-bold bg-white text-slate-600 hover:bg-slate-200 border border-slate-200 transition-colors">
+                    매뉴얼/데이터시트
+                </button>
+                <button onclick="setResourceCategory('CAD')" data-cat="CAD" class="res-filter-btn px-4 py-2 rounded-lg text-xs font-bold bg-white text-slate-600 hover:bg-slate-200 border border-slate-200 transition-colors">
+                    CAD 도면 (STEP/DWG)
+                </button>
+            </div>
+
+            <!-- 자료실 반응형 테이블 컨테이너 -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-navy-900 text-white text-xs uppercase tracking-wider">
+                                <th class="py-4 px-5 font-semibold">구분</th>
+                                <th class="py-4 px-5 font-semibold">파일명 / 관련 모델</th>
+                                <th class="py-4 px-5 font-semibold">버전</th>
+                                <th class="py-4 px-5 font-semibold">지원 OS / 형식</th>
+                                <th class="py-4 px-5 font-semibold">업데이트일</th>
+                                <th class="py-4 px-5 font-semibold text-right">다운로드</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resource-table-body" class="divide-y divide-slate-200 text-sm">
+                            <!-- 자바스크립트로 동적 행 생성 -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 검색 결과 없음 표시 -->
+                <div id="resource-empty" class="hidden py-12 text-center text-slate-500">
+                    <i class="fa-regular fa-folder-open text-3xl mb-2 text-slate-400"></i>
+                    <p>검색 조건에 일치하는 자료가 없습니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 추가 섹션: 산업별 솔루션/적용분야 (Solutions) ==================== -->
+    <section id="solutions" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="text-sky-600 font-bold text-sm tracking-wider uppercase">INDUSTRY APPLICATIONS</span>
+            <h2 class="text-3xl font-bold text-navy-900 mt-2">산업별 맞춤형 계측 솔루션</h2>
+            <p class="text-slate-600 mt-3">각 산업 분야의 국제 규격과 현장 환경에 최적화된 하드웨어+소프트웨어 통합 패키지를 제안합니다.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-7 rounded-2xl border border-slate-200 hover:border-sky-500 hover:shadow-lg transition-all">
+                <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl mb-5">
+                    <i class="fa-solid fa-car-battery"></i>
+                </div>
+                <h3 class="text-xl font-bold text-navy-900 mb-2">전기차·배터리 신뢰성 시험</h3>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">배터리 셀/모듈의 충방전 열화 테스트, 절연 저항 계측 및 열폭주 모니터링 다채널 DAQ 시스템 구축.</p>
+                <ul class="text-xs text-slate-500 space-y-1.5 border-t border-slate-100 pt-4">
+                    <li><i class="fa-solid fa-check text-sky-600 mr-1.5"></i>고전압 절연 데이터 로거 연동</li>
+                    <li><i class="fa-solid fa-check text-sky-600 mr-1.5"></i>항온항습 챔버 통합 제어 SW 제공</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-7 rounded-2xl border border-slate-200 hover:border-sky-500 hover:shadow-lg transition-all">
+                <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl mb-5">
+                    <i class="fa-solid fa-gears"></i>
+                </div>
+                <h3 class="text-xl font-bold text-navy-900 mb-2">스마트 팩토리 설비 예지보전</h3>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">회전체 진동·가속도 센서 및 프레스 하중 로드셀을 활용한 실시간 이상 감지 및 공정 품질 자동 판별.</p>
+                <ul class="text-xs text-slate-500 space-y-1.5 border-t border-slate-100 pt-4">
+                    <li><i class="fa-solid fa-check text-sky-600 mr-1.5"></i>산업용 IEPE 가속도 센서 & FFT 분석</li>
+                    <li><i class="fa-solid fa-check text-sky-600 mr-1.5"></i>PLC / EtherCAT 실시간 데이터 전송</li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-7 rounded-2xl border border-slate-200 hover:border-sky-500 hover:shadow-lg transition-all">
+                <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl mb-5">
+                    <i class="fa-solid fa-microscope"></i>
+                </div>
+                <h3 class="text-xl font-bold text-navy-900 mb-2">반도체·디스플레이 정밀 검사</h3>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">나노미터급 비접촉 변위 측정 및 클린룸 환경 차압·미세 진동 계측을 통한 수율 향상 솔루션.</p>
+                <ul class="text-xs text-slate-500 space-y-1.5 border-t border-slate-100 pt-4">
+                    <li><i class="fa-solid fa-check text-sky-600 mr-1.5"></i>초고속 레이저 변위 센서 적용</li>
+                    <li><i class="fa-solid fa-check text-sky-600 mr-1.5"></i>Python / C# SDK API 라이브러리 지원</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 5. 온라인 견적 및 기술 문의 (Quick Inquiry / Contact) ==================== -->
+    <section id="contact" class="py-20 bg-navy-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- 좌측 안내 정보 -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-sky-400 font-bold text-sm tracking-wider uppercase">TECHNICAL SUPPORT & QUOTE</span>
+                    <h2 class="text-3xl font-bold leading-tight">온라인 견적 및 엔지니어링 기술 문의</h2>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        제품 사양 선정이 어려우시거나 커스텀 계측 시스템 구축이 필요하신가요? 분야별 전문 엔지니어가 검토 후 영업일 기준 24시간 이내에 회신해 드립니다.
+                    </p>
+
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-start space-x-4 bg-navy-800/80 p-4 rounded-xl border border-slate-700/70">
+                            <div class="w-10 h-10 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-phone-volume"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">기술영업 및 견적 직통 문의</div>
+                                <div class="text-lg font-bold text-white mt-0.5">031-000-0000</div>
+                                <div class="text-xs text-slate-400 mt-0.5">평일 09:00 ~ 18:00 (점심시간 12:00~13:00)</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4 bg-navy-800/80 p-4 rounded-xl border border-slate-700/70">
+                            <div class="w-10 h-10 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-envelope-open-text"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">이메일 견적서/사양서 접수</div>
+                                <div class="text-base font-bold text-white mt-0.5">sales@tech-measurement.co.kr</div>
+                                <div class="text-xs text-slate-400 mt-0.5">도면 또는 사양서 첨부 시 빠른 검토 가능</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 우측 B2B 문의 폼 -->
+                <div class="lg:col-span-7">
+                    <div class="bg-white text-slate-800 rounded-2xl p-6 sm:p-8 shadow-xl">
+                        <h3 class="text-xl font-bold text-navy-900 mb-6 flex items-center">
+                            <i class="fa-solid fa-pen-to-square text-sky-600 mr-2"></i>
+                            빠른 견적 / 기술상담 신청서
+                        </h3>
+
+                        <form id="inquiry-form" onsubmit="handleInquirySubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1.5">회사명 / 기관명 <span class="text-rose-500">*</span></label>
+                                    <input type="text" id="inq-company" required placeholder="예: (주)한국정밀기계"
+                                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1.5">담당자명 / 직급 <span class="text-rose-500">*</span></label>
+                                    <input type="text" id="inq-name" required placeholder="예: 김엔지니어 책임연구원"
+                                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1.5">연락처 (휴대폰/직통) <span class="text-rose-500">*</span></label>
+                                    <input type="tel" id="inq-phone" required placeholder="예: 010-1234-5678"
+                                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1.5">업무용 이메일 <span class="text-rose-500">*</span></label>
+                                    <input type="email" id="inq-email" required placeholder="engineer@company.co.kr"
+                                        class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">관심 품목 / 문의 유형 <span class="text-rose-500">*</span></label>
+                                <select id="inq-category" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                                    <option value="산업용 장비 (시험기, 챔버, 전원공급장치)">산업용 장비 (시험기, 챔버, 전원공급장치)</option>
+                                    <option value="정밀 계측기 (데이터 로거, DAQ, 오실로스코프)">정밀 계측기 (데이터 로거, DAQ, 오실로스코프)</option>
+                                    <option value="산업용 센서 (로드셀, 압력센서, 변위/가속도)">산업용 센서 (로드셀, 압력센서, 변위/가속도)</option>
+                                    <option value="제어/분석 소프트웨어 및 SDK 커스터마이징">제어/분석 소프트웨어 및 SDK 커스터마이징</option>
+                                    <option value="교정(Calibration) 및 A/S 기술지원">교정(Calibration) 및 A/S 기술지원</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">상세 문의 내용 (모델명, 수량, 측정 범위 등) <span class="text-rose-500">*</span></label>
+                                <textarea id="inq-message" rows="4" required placeholder="필요하신 장비의 측정 범위, 채널 수, 희망 납기일 등을 적어주시면 보다 정확한 견적 안내가 가능합니다."
+                                    class="w-full px-4 py-2.5 bg-slate-50 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"></textarea>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-2">
+                                <label class="flex items-center space-x-2 text-xs text-slate-600 cursor-pointer">
+                                    <input type="checkbox" required checked class="rounded text-sky-600 focus:ring-sky-500">
+                                    <span>견적 회신을 위한 개인정보 수집 및 이용에 동의합니다.</span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl shadow-md transition-all flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>견적 및 기술상담 접수하기</span>
+                            </button>
+                        </form>
+
+                        <!-- 접수 완료 피드백 박스 (제출 시 표시) -->
+                        <div id="inquiry-success" class="hidden mt-6 p-5 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900">
+                            <div class="flex items-start space-x-3">
+                                <i class="fa-solid fa-circle-check text-emerald-600 text-xl mt-0.5"></i>
+                                <div>
+                                    <h4 class="font-bold text-base">견적 및 기술 문의가 정상적으로 접수되었습니다.</h4>
+                                    <p id="inquiry-summary" class="text-xs text-emerald-700 mt-1 leading-relaxed"></p>
+                                    <button onclick="resetInquiryForm()" class="mt-3 text-xs font-bold text-emerald-700 underline hover:text-emerald-900">
+                                        추가 문의 작성하기
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== 6. 푸터 (Footer) ==================== -->
+    <footer class="bg-slate-950 text-slate-400 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-800">
+                <div class="md:col-span-2 space-y-3">
+                    <div class="flex items-center space-x-2 text-white">
+                        <i class="fa-solid fa-wave-square text-sky-400 text-lg"></i>
+                        <span class="text-lg font-bold tracking-tight">TECH-MEASUREMENT</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed max-w-md">
+                        (주)테크메저먼트는 산업용 정밀 계측기, 시험 장비, 고성능 센서 및 데이터 분석 소프트웨어를 공급하는 B2B 엔지니어링 전문 기업입니다.
+                    </p>
+                    <div class="text-xs text-slate-500 space-y-1 pt-2">
+                        <p>본사 및 기술연구소: 경기도 화성시 동탄첨단산업1로 00, 테크타워 801호</p>
+                        <p>사업자등록번호: 000-81-00000 | 대표이사: 홍길동 | 통신판매업신고: 제2026-경기화성-0000호</p>
+                        <p>대표전화: 031-000-0000 | 팩스: 031-000-0001 | 이메일: support@tech-measurement.co.kr</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">제품 및 솔루션</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#products" onclick="filterProducts('equipment')" class="hover:text-sky-400 transition-colors">산업용 시험장비/챔버</a></li>
+                        <li><a href="#products" onclick="filterProducts('instrument')" class="hover:text-sky-400 transition-colors">다채널 DAQ/데이터로거</a></li>
+                        <li><a href="#products" onclick="filterProducts('sensor')" class="hover:text-sky-400 transition-colors">로드셀/압력/변위 센서</a></li>
+                        <li><a href="#solutions" class="hover:text-sky-400 transition-colors">산업별 맞춤형 솔루션</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">엔지니어링 지원</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#software" onclick="setResourceCategory('SOFTWARE')" class="hover:text-sky-400 transition-colors">계측 제어 소프트웨어</a></li>
+                        <li><a href="#software" onclick="setResourceCategory('DRIVER')" class="hover:text-sky-400 transition-colors">드라이버 및 펌웨어</a></li>
+                        <li><a href="#software" onclick="setResourceCategory('CAD')" class="hover:text-sky-400 transition-colors">2D/3D CAD 도면 자료실</a></li>
+                        <li><a href="#contact" class="hover:text-sky-400 transition-colors">온라인 견적 및 A/S 접수</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 TECH-MEASUREMENT Co., Ltd. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-slate-300">개인정보처리방침</a>
+                    <a href="#" class="hover:text-slate-300">이용약관</a>
+                    <a href="#" class="hover:text-slate-300">원격기술지원</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== 모달 1: 제품 상세 스펙 및 자료 연동 모달 ==================== -->
+    <div id="product-modal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl border border-slate-200 animate-fade-in">
+            <div class="bg-navy-900 text-white px-6 py-4 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <span id="modal-badge" class="px-2.5 py-0.5 text-xs font-bold bg-sky-600 rounded">카테고리</span>
+                    <span id="modal-model" class="font-mono text-sm text-sky-300">MODEL-000</span>
+                </div>
+                <button onclick="closeProductModal()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-5">
+                <div>
+                    <h3 id="modal-title" class="text-2xl font-bold text-navy-900">제품명</h3>
+                    <p id="modal-desc" class="text-sm text-slate-600 mt-2 leading-relaxed">제품 상세 설명</p>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200">
+                    <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">주요 기술 사양 (Technical Specifications)</h4>
+                    <ul id="modal-specs" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm text-slate-700">
+                        <!-- 동적 스펙 리스트 -->
+                    </ul>
+                </div>
+
+                <div class="flex flex-wrap gap-3 pt-2">
+                    <button id="modal-quote-btn" class="flex-1 py-3 px-4 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl text-sm transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-regular fa-file-lines"></i>
+                        <span>이 제품 견적 문의하기</span>
+                    </button>
+                    <button onclick="goToRelatedDocs()" class="py-3 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-sm transition-colors flex items-center justify-center space-x-2">
+                        <i class="fa-solid fa-download text-sky-600"></i>
+                        <span>데이터시트/CAD 보기</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 모달 2: 통합 검색 모달 ==================== -->
+    <div id="search-modal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-sm flex items-start justify-center pt-20 p-4">
+        <div class="bg-white rounded-2xl max-w-xl w-full p-6 shadow-2xl border border-slate-200">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-navy-900">제품 모델명 / 소프트웨어 빠른 검색</h3>
+                <button onclick="toggleSearchModal()" class="text-slate-400 hover:text-slate-700">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div class="relative">
+                <input type="text" id="global-search-input" onkeyup="handleGlobalSearch()" placeholder="예: TM-DAQ800, 로드셀, 챔버, LabVIEW..."
+                    class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400"></i>
+            </div>
+            <div id="global-search-results" class="mt-4 max-h-64 overflow-y-auto divide-y divide-slate-100 text-sm">
+                <p class="text-xs text-slate-400 py-4 text-center">검색어를 입력하시면 일치하는 제품 및 자료실 파일을 즉시 찾아드립니다.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 다운로드 알림 토스트 (alert 대체 UI) ==================== -->
+    <div id="download-toast" class="hidden fixed bottom-6 right-6 z-50 max-w-sm w-full bg-navy-900 text-white p-4 rounded-xl shadow-2xl border border-sky-500/40 flex items-start space-x-3 transition-all">
+        <div class="w-9 h-9 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0 mt-0.5">
+            <i class="fa-solid fa-cloud-arrow-down text-lg"></i>
+        </div>
+        <div class="flex-1">
+            <div class="flex justify-between items-start">
+                <h4 class="text-sm font-bold text-white">파일 다운로드 시작</h4>
+                <button onclick="closeToast()" class="text-slate-400 hover:text-white text-xs">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <p id="toast-filename" class="text-xs text-sky-300 font-mono mt-1 break-all">filename.zip</p>
+            <p class="text-[11px] text-slate-400 mt-1">엔지니어링 자료실 서버에서 안전하게 전송 중입니다. (프로토타입 시뮬레이션)</p>
+        </div>
+    </div>
+
+    <!-- ==================== JavaScript 인터랙션 로직 ==================== -->
+    <script>
+        // 1. 제품 데이터베이스 (샘플 데이터)
+        const productsData = [
+            // 산업용 장비
+            {
+                id: 'eq-1',
+                category: 'equipment',
+                categoryLabel: '산업용 장비',
+                model: 'TM-UTM500',
+                name: '고정밀 만능재료시험기 (UTM)',
+                summary: '인장·압축·굴곡 강도 정밀 물성 테스트 장비 (최대 50kN)',
+                specs: ['최대 하중 용량: 50 kN', '속도 제어 범위: 0.001 ~ 1,000 mm/min', '하중 정밀도: ±0.5% 이내', '전용 분석 SW (TM-Material) 기본 제공'],
+                icon: 'fa-compress-arrows-alt'
+            },
+            {
+                id: 'eq-2',
+                category: 'equipment',
+                categoryLabel: '산업용 장비',
+                model: 'TM-THC300',
+                name: '항온항습 신뢰성 시험 챔버',
+                summary: '극한 온도(-70°C ~ +180°C) 및 습도 환경 내구성 테스트',
+                specs: ['온도 범위: -70°C ~ +180°C', '습도 범위: 20% ~ 98% RH', '내부 용적: 300 Liters (SUS304)', '통신 인터페이스: RS-485 / Ethernet'],
+                icon: 'fa-temperature-half'
+            },
+            {
+                id: 'eq-3',
+                category: 'equipment',
+                categoryLabel: '산업용 장비',
+                model: 'TM-PSU1200',
+                name: '프로그래머블 DC 전원공급장치',
+                summary: '고출력 저리플 가변 직류 파워 서플라이 (1200W급)',
+                specs: ['출력 전압/전류: 0~80V / 0~45A', '저리플 노이즈: < 5mVrms', '시퀀스 파형 출력 기능 내장', 'SCPI 명령어 및 LabVIEW 지원'],
+                icon: 'fa-bolt'
+            },
+            {
+                id: 'eq-4',
+                category: 'equipment',
+                categoryLabel: '산업용 장비',
+                model: 'TM-VIB200',
+                name: '전자동 진동 내구성 시험기',
+                summary: '자동차·항공 부품용 정현파 및 랜덤 진동 시험 시스템',
+                specs: ['최대 가속도: 100 G', '주파수 대역: 5 Hz ~ 3,500 Hz', '3축 동시 모니터링 센서 연동', '공랭식 저소음 파워 앰프 포함'],
+                icon: 'fa-wave-square'
+            },
+
+            // 정밀 계측기
+            {
+                id: 'ins-1',
+                category: 'instrument',
+                categoryLabel: '정밀 계측기',
+                model: 'TM-DAQ800',
+                name: '16채널 고속 동기화 데이터 로거',
+                summary: '전압·전류·열전대·스트레인 동시 수집 모듈형 DAQ',
+                specs: ['샘플링 속도: 채널당 최대 200 kS/s', '분해능: 24-Bit 고분해능 ADC', '채널 간 절연: 1,000 VDC 절연', '저장 매체: 내장 SSD + 실시간 PC 스트리밍'],
+                icon: 'fa-server'
+            },
+            {
+                id: 'ins-2',
+                category: 'instrument',
+                categoryLabel: '정밀 계측기',
+                model: 'TM-OSC400',
+                name: '4채널 디지털 오실로스코프',
+                summary: '500MHz 대역폭 및 시리얼 버스 프로토콜 디코딩 지원',
+                specs: ['아날로그 대역폭: 500 MHz', '실시간 샘플링: 5 GSa/s', '10.1인치 정전식 터치 디스플레이', 'CAN, LIN, SPI, I2C 트리거/디코딩'],
+                icon: 'fa-chart-line'
+            },
+            {
+                id: 'ins-3',
+                category: 'instrument',
+                categoryLabel: '정밀 계측기',
+                model: 'TM-PWR90',
+                name: '고정밀 디지털 전력 분석기',
+                summary: '인버터·모터 효율 및 고조파 정밀 측정 파워 애널라이저',
+                specs: ['기본 전력 정확도: ±0.02%', '측정 대역폭: DC ~ 5 MHz', '3상 4선식 6채널 동시 연산', '모터 토크/RPM 센서 직접 입력'],
+                icon: 'fa-plug-circle-bolt'
+            },
+            {
+                id: 'ins-4',
+                category: 'instrument',
+                categoryLabel: '정밀 계측기',
+                model: 'TM-DMM75',
+                name: '7.5디지트 표준 디지털 멀티미터',
+                summary: '교정실 및 R&D 연구소용 초정밀 저항·전압 계측기',
+                specs: ['표시 자릿수: 7½ Digits', 'DC 전압 정확도: 14 ppm', '4선식 옴(Ω) 및 온도 측정 지원', 'GPIB, USB, LAN 표준 탑재'],
+                icon: 'fa-gauge-high'
+            },
+
+            // 산업용 센서
+            {
+                id: 'sen-1',
+                category: 'sensor',
+                categoryLabel: '산업용 센서',
+                model: 'TM-LC10T',
+                name: '팬케이크형 고정밀 인장·압축 로드셀',
+                summary: '프레스 공정 및 시험기 장착용 고강성 로드셀 센서',
+                specs: ['정격 용량: 100 kgf ~ 50 ton', '비직선성/히스테리시스: 0.03% R.O.', '보호 등급: IP67 방수·방진 설계', '스테인리스 스틸(SUS630) 하우징'],
+                icon: 'fa-weight-hanging'
+            },
+            {
+                id: 'sen-2',
+                category: 'sensor',
+                categoryLabel: '산업용 센서',
+                model: 'TM-PS400',
+                name: '산업용 절대압·게이지 압력 트랜스미터',
+                summary: '유압 라인 및 반도체 가스 배관용 고내구성 압력 센서',
+                specs: ['측정 압력: -1 bar ~ 600 bar', '출력 신호: 4~20mA / 0~10V / RS485', '응답 속도: < 1 ms 고속 응답', '과압 보호: 정격의 200%'],
+                icon: 'fa-gauge'
+            },
+            {
+                id: 'sen-3',
+                category: 'sensor',
+                categoryLabel: '산업용 센서',
+                model: 'TM-LD50',
+                name: 'CMOS 비접촉 레이저 변위 센서',
+                summary: '0.1㎛ 반복 정밀도의 고속 두께·단차·진동 변위 측정',
+                specs: ['측정 중심거리: 50 mm (±10 mm)', '반복 정밀도: 0.1 ㎛', '샘플링 주기: 최대 50 kHz', 'EtherCAT / 아날로그 동시 출력'],
+                icon: 'fa-crosshairs'
+            },
+            {
+                id: 'sen-4',
+                category: 'sensor',
+                categoryLabel: '산업용 센서',
+                model: 'TM-ACC3D',
+                name: '3축 산업용 IEPE 가속도 센서',
+                summary: '설비 예지보전 및 구조물 모달 해석용 초소형 진동 센서',
+                specs: ['감도: 100 mV/g (±5%)', '주파수 응답: 0.5 Hz ~ 10 kHz', '사용 온도: -55°C ~ +125°C', '티타늄 케이스 및 M12 커넥터'],
+                icon: 'fa-wave-square'
+            }
+        ];
+
+        // 2. 소프트웨어 & 자료실 데이터베이스
+        const resourcesData = [
+            { id: 1, category: 'SOFTWARE', catName: '제어/분석 프로그램', title: 'TM-DAQ Studio 통합 계측 및 실시간 파형 분석 소프트웨어', model: 'TM-DAQ800 시리즈 공용', version: 'v4.2.1', format: 'Windows 10/11 (64-bit) .exe', date: '2026-10-15', size: '248 MB' },
+            { id: 2, category: 'SOFTWARE', catName: '제어/분석 프로그램', title: 'TM-Chamber Pro 온도/습도 프로파일 원격 제어 프로그램', model: 'TM-THC 시리즈', version: 'v2.8.0', format: 'Windows 10/11 .msi', date: '2026-09-22', size: '112 MB' },
+            { id: 3, category: 'DRIVER', catName: '드라이버/펌웨어', title: 'USB-DAQ / EtherCAT 통합 통신 드라이버 및 Python/C# SDK', model: '전 계측기 모델', version: 'v3.5.4', format: 'Win/Linux SDK (.zip)', date: '2026-11-02', size: '64 MB' },
+            { id: 4, category: 'DRIVER', catName: '드라이버/펌웨어', title: 'TM-OSC400 오실로스코프 최신 시스템 펌웨어 업데이트', model: 'TM-OSC400', version: 'v1.14.2', format: 'Firmware Binary (.bin)', date: '2026-08-30', size: '38 MB' },
+            { id: 5, category: 'MANUAL', catName: '매뉴얼/데이터시트', title: '2026 산업용 정밀 센서 & 로드셀 종합 카탈로그 및 선정 가이드', model: '센서 전 라인업', version: 'Rev.26A', format: 'PDF 문서 (국문/영문)', date: '2026-11-10', size: '18.5 MB' },
+            { id: 6, category: 'MANUAL', catName: '매뉴얼/데이터시트', title: 'TM-UTM500 만능재료시험기 사용자 매뉴얼 및 통신 프로토콜 정의서', model: 'TM-UTM500', version: 'v3.1', format: 'PDF 문서 (국문)', date: '2026-07-19', size: '9.2 MB' },
+            { id: 7, category: 'CAD', catName: 'CAD 도면', title: '팬케이크형 로드셀 (TM-LC10T) 2D DWG 및 3D STEP 조립 도면', model: 'TM-LC10T', version: 'v1.0', format: 'CAD 패키지 (.dwg / .step)', date: '2026-06-14', size: '14.1 MB' },
+            { id: 8, category: 'CAD', catName: 'CAD 도면', title: '레이저 변위 센서 (TM-LD50) 취부 브라켓 포함 3D 모델링 데이터', model: 'TM-LD50', version: 'v1.2', format: '3D STEP / IGES (.zip)', date: '2026-08-05', size: '21.7 MB' }
+        ];
+
+        let currentProductCategory = 'equipment';
+        let currentResourceCategory = 'ALL';
+        let currentSelectedProduct = null;
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(currentProductCategory);
+            renderResources();
+        });
+
+        // ==================== 제품 카테고리 필터링 및 렌더링 ====================
+        function filterProducts(category) {
+            currentProductCategory = category;
+
+            // 탭 버튼 활성화 스타일 업데이트
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                if (btn.dataset.tab === category) {
+                    btn.className = 'tab-btn active px-6 py-3 rounded-xl text-sm font-bold transition-all bg-navy-900 text-white shadow-md';
+                } else {
+                    btn.className = 'tab-btn px-6 py-3 rounded-xl text-sm font-bold transition-all bg-white text-slate-600 hover:bg-slate-100 border border-slate-200';
+                }
+            });
+
+            renderProducts(category);
+        }
+
+        function renderProducts(category) {
+            const grid = document.getElementById('product-grid');
+            const filtered = productsData.filter(item => item.category === category);
+
+            grid.innerHTML = filtered.map(product => `
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-xl hover:border-sky-400 transition-all flex flex-col justify-between group">
+                    <div>
+                        <!-- 제품 이미지 플레이스홀더 영역 (엔지니어링 도식 스타일) -->
+                        <div class="h-44 bg-gradient-to-br from-slate-100 to-slate-200 relative flex flex-col items-center justify-center p-4 border-b border-slate-200 group-hover:from-sky-50 group-hover:to-slate-100 transition-colors">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 bg-navy-900 text-white font-mono text-[11px] font-bold rounded">
+                                ${product.model}
+                            </span>
+                            <div class="w-16 h-16 rounded-2xl bg-white shadow-sm border border-slate-200 flex items-center justify-center text-sky-600 text-2xl group-hover:scale-110 transition-transform">
+                                <i class="fa-solid ${product.icon}"></i>
+                            </div>
+                            <span class="text-[11px] text-slate-400 font-mono mt-2">PRECISION HARDWARE</span>
+                        </div>
+
+                        <!-- 제품 정보 영역 -->
+                        <div class="p-5">
+                            <div class="text-xs font-semibold text-sky-600 mb-1">${product.categoryLabel}</div>
+                            <h3 class="text-lg font-bold text-navy-900 leading-snug mb-2">${product.name}</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed mb-4">${product.summary}</p>
+                            
+                            <!-- 핵심 스펙 요약 -->
+                            <ul class="space-y-1.5 text-xs text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                ${product.specs.slice(0, 2).map(spec => `
+                                    <li class="flex items-start">
+                                        <span class="text-sky-500 mr-1.5">•</span>
+                                        <span>${spec}</span>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 하단 버튼 영역 -->
+                    <div class="px-5 pb-5 pt-2 flex gap-2">
+                        <button onclick="openProductModal('${product.id}')" class="flex-1 py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold rounded-lg text-xs transition-colors">
+                            상세보기
+                        </button>
+                        <button onclick="requestProductQuote('${product.model}', '${product.name}')" class="flex-1 py-2.5 px-3 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-lg text-xs transition-colors">
+                            견적문의
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ==================== 자료실 필터링 및 렌더링 ====================
+        function setResourceCategory(cat) {
+            currentResourceCategory = cat;
+
+            document.querySelectorAll('.res-filter-btn').forEach(btn => {
+                if (btn.dataset.cat === cat) {
+                    btn.className = 'res-filter-btn active px-4 py-2 rounded-lg text-xs font-bold bg-sky-600 text-white transition-colors';
+                } else {
+                    btn.className = 'res-filter-btn px-4 py-2 rounded-lg text-xs font-bold bg-white text-slate-600 hover:bg-slate-200 border border-slate-200 transition-colors';
+                }
+            });
+
+            renderResources();
+        }
+
+        function filterResources() {
+            renderResources();
+        }
+
+        function renderResources() {
+            const tbody = document.getElementById('resource-table-body');
+            const emptyBox = document.getElementById('resource-empty');
+            const keyword = document.getElementById('resource-search').value.toLowerCase().trim();
+
+            const filtered = resourcesData.filter(item => {
+                const matchCat = currentResourceCategory === 'ALL' || item.category === currentResourceCategory;
+                const matchKey = !keyword || 
+                    item.title.toLowerCase().includes(keyword) || 
+                    item.model.toLowerCase().includes(keyword) ||
+                    item.catName.toLowerCase().includes(keyword);
+                return matchCat && matchKey;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '';
+                emptyBox.classList.remove('hidden');
+                return;
+            }
+
+            emptyBox.classList.add('hidden');
+
+            const badgeColors = {
+                'SOFTWARE': 'bg-sky-100 text-sky-700 border-sky-200',
+                'DRIVER': 'bg-indigo-100 text-indigo-700 border-indigo-200',
+                'MANUAL': 'bg-amber-100 text-amber-700 border-amber-200',
+                'CAD': 'bg-emerald-100 text-emerald-700 border-emerald-200'
+            };
+
+            tbody.innerHTML = filtered.map(item => `
+                <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="py-4 px-5 whitespace-nowrap">
+                        <span class="px-2.5 py-1 rounded-md text-xs font-bold border ${badgeColors[item.category]}">
+                            ${item.catName}
+                        </span>
+                    </td>
+                    <td class="py-4 px-5">
+                        <div class="font-bold text-navy-900">${item.title}</div>
+                        <div class="text-xs text-slate-500 mt-0.5">적용 모델: <span class="font-mono text-slate-700">${item.model}</span> (${item.size})</div>
+                    </td>
+                    <td class="py-4 px-5 whitespace-nowrap font-mono text-xs font-semibold text-slate-700">
+                        ${item.version}
+                    </td>
+                    <td class="py-4 px-5 whitespace-nowrap text-xs text-slate-600">
+                        ${item.format}
+                    </td>
+                    <td class="py-4 px-5 whitespace-nowrap text-xs text-slate-500 font-mono">
+                        ${item.date}
+                    </td>
+                    <td class="py-4 px-5 whitespace-nowrap text-right">
+                        <button onclick="simulateDownload('${item.title} (${item.version})')" 
+                            class="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-navy-900 hover:bg-sky-600 text-white text-xs font-bold rounded-lg transition-colors">
+                            <i class="fa-solid fa-download"></i>
+                            <span>다운로드</span>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // ==================== 다운로드 시뮬레이션 토스트 ====================
+        let toastTimeout;
+        function simulateDownload(filename) {
+            const toast = document.getElementById('download-toast');
+            document.getElementById('toast-filename').textContent = filename;
+            toast.classList.remove('hidden');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 4000);
+        }
+
+        function closeToast() {
+            document.getElementById('download-toast').classList.add('hidden');
+        }
+
+        // ==================== 제품 상세 모달 제어 ====================
+        function openProductModal(productId) {
+            const product = productsData.find(p => p.id === productId);
+            if (!product) return;
+
+            currentSelectedProduct = product;
+            document.getElementById('modal-badge').textContent = product.categoryLabel;
+            document.getElementById('modal-model').textContent = product.model;
+            document.getElementById('modal-title').textContent = product.name;
+            document.getElementById('modal-desc').textContent = product.summary;
+
+            const specsList = document.getElementById('modal-specs');
+            specsList.innerHTML = product.specs.map(spec => `
+                <li class="flex items-center space-x-2">
+                    <i class="fa-solid fa-check text-sky-600 text-xs"></i>
+                    <span>${spec}</span>
+                </li>
+            `).join('');
+
+            document.getElementById('modal-quote-btn').onclick = () => {
+                closeProductModal();
+                requestProductQuote(product.model, product.name);
+            };
+
+            document.getElementById('product-modal').classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            document.getElementById('product-modal').classList.add('hidden');
+        }
+
+        function goToRelatedDocs() {
+            closeProductModal();
+            const searchInput = document.getElementById('resource-search');
+            if (currentSelectedProduct) {
+                searchInput.value = currentSelectedProduct.model;
+                setResourceCategory('ALL');
+            }
+            document.getElementById('software').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ==================== 견적 문의 폼 연동 ====================
+        function requestProductQuote(model, name) {
+            const contactSection = document.getElementById('contact');
+            const messageBox = document.getElementById('inq-message');
+            
+            messageBox.value = `[견적 요청 제품] ${name} (모델명: ${model})\n- 희망 수량: 1 Set\n- 추가 요청사항: `;
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => document.getElementById('inq-company').focus(), 600);
+        }
+
+        function selectInquiryProduct(text) {
+            const messageBox = document.getElementById('inq-message');
+            if (!messageBox.value) {
+                messageBox.value = `[문의 구분] ${text}\n- 상세 내용: `;
+            }
+        }
+
+        function handleInquirySubmit(e) {
+            e.preventDefault();
+            const company = document.getElementById('inq-company').value;
+            const name = document.getElementById('inq-name').value;
+            const category = document.getElementById('inq-category').value;
+
+            const form = document.getElementById('inquiry-form');
+            const successBox = document.getElementById('inquiry-success');
+            const summary = document.getElementById('inquiry-summary');
+
+            summary.innerHTML = `<strong>${company} (${name})</strong>님께서 요청하신 <strong>[${category}]</strong> 건이 담당 엔지니어에게 배정되었습니다. 입력하신 연락처로 신속히 안내해 드리겠습니다.`;
+
+            form.classList.add('hidden');
+            successBox.classList.remove('hidden');
+        }
+
+        function resetInquiryForm() {
+            document.getElementById('inquiry-form').reset();
+            document.getElementById('inquiry-form').classList.remove('hidden');
+            document.getElementById('inquiry-success').classList.add('hidden');
+        }
+
+        // ==================== 모바일 메뉴 및 통합 검색 모달 ====================
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function toggleSearchModal() {
+            const modal = document.getElementById('search-modal');
+            modal.classList.toggle('hidden');
+            if (!modal.classList.contains('hidden')) {
+                document.getElementById('global-search-input').focus();
+            }
+        }
+
+        function handleGlobalSearch() {
+            const query = document.getElementById('global-search-input').value.toLowerCase().trim();
+            const resultsContainer = document.getElementById('global-search-results');
+
+            if (!query) {
+                resultsContainer.innerHTML = '<p class="text-xs text-slate-400 py-4 text-center">검색어를 입력하시면 일치하는 제품 및 자료실 파일을 즉시 찾아드립니다.</p>';
+                return;
+            }
+
+            const matchedProducts = productsData.filter(p => 
+                p.name.toLowerCase().includes(query) || p.model.toLowerCase().includes(query) || p.summary.toLowerCase().includes(query)
+            );
+            const matchedResources = resourcesData.filter(r => 
+                r.title.toLowerCase().includes(query) || r.model.toLowerCase().includes(query)
+            );
+
+            if (matchedProducts.length === 0 && matchedResources.length === 0) {
+                resultsContainer.innerHTML = '<p class="text-xs text-slate-500 py-4 text-center">일치하는 검색 결과가 없습니다.</p>';
+                return;
+            }
+
+            let html = '';
+            matchedProducts.forEach(p => {
+                html += `
+                    <div onclick="toggleSearchModal(); openProductModal('${p.id}')" class="py-3 px-2 hover:bg-slate-50 cursor-pointer rounded-lg flex justify-between items-center">
+                        <div>
+                            <span class="text-[11px] font-bold text-sky-600">[제품] ${p.model}</span>
+                            <div class="font-bold text-navy-900">${p.name}</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-right text-slate-400 text-xs"></i>
+                    </div>
+                `;
+            });
+
+            matchedResources.forEach(r => {
+                html += `
+                    <div onclick="toggleSearchModal(); document.getElementById('software').scrollIntoView({behavior:'smooth'}); simulateDownload('${r.title}')" class="py-3 px-2 hover:bg-slate-50 cursor-pointer rounded-lg flex justify-between items-center">
+                        <div>
+                            <span class="text-[11px] font-bold text-emerald-600">[자료실] ${r.catName}</span>
+                            <div class="font-bold text-navy-900">${r.title}</div>
+                        </div>
+                        <i class="fa-solid fa-download text-sky-600 text-xs"></i>
+                    </div>
+                `;
+            });
+
+            resultsContainer.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
